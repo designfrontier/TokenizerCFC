@@ -1,0 +1,42 @@
+Welcome to Tokenizer 1.1!
+
+Tokenizer is a Nonce/Token management system for preventing XSRF (cross site request forgery) on coldfusion based forms.
+It's purpose is to create a simple standardized way to manage tokens and prevent blind posts that could be hazardous to
+your users or system. Check out the examples, tokenizer.riaforge.org, and designfrontier.net if you have questions or issues.
+
+The article about Tokenizer and implementing it is here: http://designfrontier.net/articles/?id=9
+
+Changes
+-----------------------------------------
+1.1
+	Corrected a bug in the submit.cfm that referenced the wrong token name when removing the token.
+	Added a checkTokenLife() method that returns the number of seconds left in the life of a token.
+	Added a checkTokenLifeRemote() method for remote access to the number of seconds left in the life of a token.
+	Added output="no" to the component and the methods within it.
+
+1.0.2
+	The only change in 1.0.2 was the addition of demos for self posting and posting to another page.
+
+1.0.1
+	The only change for 1.0.1 is the addition of an id to the hidden input that is created by writeTokenToPage()
+
+1.0.0
+	This is the base release. Check out the CFC and the comments in it to understand all the features, etc.
+
+
+
+Requirements
+-----------------------------------------
+Tokenizer has been tested on CF 9.0.1 and Railo 3.2.2. It should also work on CF 8 and OpenBD, though it has not been
+tested in these configurations. 
+
+If you test it and it works email daniel@designfrontier.net and I'll add it to this list and credit you with testing 
+it. Thanks!
+
+
+
+Credits
+-----------------------------------------
+The application.cfc in the examples is heavily based on Ben Nadel's application.cfc template (http://www.bennadel.com/blog/726-ColdFusion-Application-cfc-Tutorial-And-Application-cfc-Reference.htm). The concept 
+for tokenizer draws heavily on Jason Dean's may fantastic security articles (htttp://12robots.com) which you should be reading.
+Tokenizer is created and maintained by Daniel Sellers www.designfrontier.net
