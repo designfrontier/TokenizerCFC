@@ -27,7 +27,7 @@ Changes
 
 Requirements
 -----------------------------------------
-Tokenizer has been tested on CF 9.0.1 and Railo 3.2.2. It should also work on CF 8 and OpenBD, though it has not been
+Tokenizer has been tested on CF 9.0.1 and Railo 3.2.2+. It should also work on CF 8 and OpenBD, though it has not been
 tested in these configurations. 
 
 If you test it and it works email daniel@designfrontier.net and I'll add it to this list and credit you with testing 
