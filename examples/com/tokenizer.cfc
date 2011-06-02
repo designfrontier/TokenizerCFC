@@ -1,4 +1,4 @@
-<!---
+<!---TOKENIZER v. 1.2
 	NOTES ON IMPLEMENTATION
 	
 	The process of implementation goes something like this:
@@ -39,7 +39,7 @@
 		 
 		 This removes the token and prevents the form from being double posted.
 --->
-<cfcomponent>
+<cfcomponent hint="Tokenizer v.1.2">
 	<cffunction name="init" access="public" returntype="tokenizer">
 		<cfargument name="sessionScope" type="struct" required="yes">
         
@@ -103,6 +103,17 @@
         <cfscript>
 			if(structKeyExists(variables.tokenstore,arguments.tokenName)){
 				structDelete(variables.tokenStore,arguments.tokenName);	
+			}
+		</cfscript>
+    </cffunction>
+    
+    <cffunction name="getTokenValue" access="public" returntype="string">
+    	<cfargument name="tokenName" type="string" required="true">
+        <cfscript>
+			if(structKeyExists(variables.tokenstore,arguments.tokenName)){
+				return variables.tokenStore[arguments.tokenName].token;	
+			}else{
+				return '';	
 			}
 		</cfscript>
     </cffunction>

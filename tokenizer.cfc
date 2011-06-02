@@ -1,6 +1,4 @@
-<!---
-	Tokenizer 1.1
-
+<!---TOKENIZER v. 1.2
 	NOTES ON IMPLEMENTATION
 	
 	The process of implementation goes something like this:
@@ -41,12 +39,12 @@
 		 
 		 This removes the token and prevents the form from being double posted.
 --->
-<cfcomponent output="no">
-	<cffunction name="init" access="public" returntype="tokenizer" output="no">
+<cfcomponent hint="Tokenizer v.1.2">
+	<cffunction name="init" access="public" returntype="tokenizer">
 		<cfargument name="sessionScope" type="struct" required="yes">
         
         <cfscript>
- 			variables.sessionScope = arguments.sessionScope;
+			variables.sessionScope = arguments.sessionScope;
 			
 			if(not StructKeyExists(variables.sessionScope,'tokenStore')){
 				//create the token store if it does not exist
@@ -59,7 +57,7 @@
 		</cfscript>
 	</cffunction>
     
-    <cffunction name="createToken" access="public" returntype="void" output="no">
+    <cffunction name="createToken" access="public" returntype="void">
     	<cfargument name="tokenName" required="true" type="string">
         <cfargument name="tokenExpires" required="true" type="numeric" hint="The number of seconds before the token expires">
         <cfscript>
@@ -73,7 +71,7 @@
 		</cfscript>
     </cffunction>
     
-    <cffunction name="writeTokenToPage" access="public" returntype="string" hint="creates the hidden form input for doing tokenization" output="no">
+    <cffunction name="writeTokenToPage" access="public" returntype="string" hint="creates the hidden form input for doing tokenization">
     	<cfargument name="tokenName" required="true" type="string">
         
         <cfscript>
@@ -81,7 +79,7 @@
 		</cfscript>
     </cffunction>
     
-    <cffunction name="isTokenExpired" access="public" returntype="boolean" output="no">
+    <cffunction name="isTokenExpired" access="public" returntype="boolean">
     	<cfargument name="tokenName" required="true" type="string">
         
         <cfscript>
@@ -89,7 +87,7 @@
 		</cfscript>
     </cffunction>
     
-    <cffunction name="checkToken" access="public" returntype="boolean" output="no">
+    <cffunction name="checkToken" access="public" returntype="boolean">
     	<cfargument name="tokenName" required="true" type="string">
         <cfargument name="tokenValue" required="true" type="string">
         
@@ -100,7 +98,7 @@
 		</cfscript>
     </cffunction>
     
-    <cffunction name="removeToken" access="public" returntype="void" output="no">
+    <cffunction name="removeToken" access="public" returntype="void">
     	<cfargument name="tokenName" type="string" required="true">
         <cfscript>
 			if(structKeyExists(variables.tokenstore,arguments.tokenName)){
@@ -109,18 +107,14 @@
 		</cfscript>
     </cffunction>
     
-    <cffunction name="checkTokenLife" access="public" returntype="numeric" output="no">
+    <cffunction name="getTokenValue" access="public" returntype="string">
     	<cfargument name="tokenName" type="string" required="true">
         <cfscript>
-			return dateDiff('s',variables.tokenStore[arguments.tokenName].expires, now());
-		</cfscript>
-    </cffunction>
-    
-    <cffunction name="checkTokenLifeRemote" access="remote" returntype="numeric" output="no">
-    	<cfargument name="tokenName" required="true" type="string">
-    	<cfscript>
-			variables.session = session;
-			return checkTokenLife(arguments.tokenName);
+			if(structKeyExists(variables.tokenstore,arguments.tokenName)){
+				return variables.tokenStore[arguments.tokenName].token;	
+			}else{
+				return '';	
+			}
 		</cfscript>
     </cffunction>
 </cfcomponent>
