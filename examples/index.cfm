@@ -18,6 +18,7 @@
 <ul>
 	<li><a href="self.cfm">Self Posting example</a></li>
 	<li><a href="other.cfm">Non-self Posting example</a></li>
+    <li><a href="ajax.cfm">AJAX Example</a> you will also need to look at <a href="setHeader.cfm">the processing page</a> to get the javascript implementation</li>
 </ul>
 </body>
 </html>
