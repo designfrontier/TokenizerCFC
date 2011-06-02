@@ -8,6 +8,10 @@ The article about Tokenizer and implementing it is here: http://designfrontier.n
 
 Changes
 -----------------------------------------
+1.2
+	Added a getTokenValue method for working with AJAX requests and tokens.
+	Updated the example docs with the AJAX examples.
+
 1.1
 	Corrected a bug in the submit.cfm that referenced the wrong token name when removing the token.
 	Added a checkTokenLife() method that returns the number of seconds left in the life of a token.
@@ -38,5 +42,7 @@ it. Thanks!
 Credits
 -----------------------------------------
 The application.cfc in the examples is heavily based on Ben Nadel's application.cfc template (http://www.bennadel.com/blog/726-ColdFusion-Application-cfc-Tutorial-And-Application-cfc-Reference.htm). The concept 
-for tokenizer draws heavily on Jason Dean's may fantastic security articles (htttp://12robots.com) which you should be reading.
+for tokenizer draws heavily on Jason Dean's may fantastic security articles (htttp://12robots.com) which you should be reading. The AJAX header code draws on http://existdissolve.com/2010/10/cfscript-alternative-to-cfheader/  for writing headers in cfscript.
+
+
 Tokenizer is created and maintained by Daniel Sellers www.designfrontier.net
