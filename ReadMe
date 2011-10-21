@@ -6,6 +6,40 @@ your users or system. Check out the examples, tokenizer.riaforge.org, and design
 
 The article about Tokenizer and implementing it is here: http://designfrontier.net/articles/?id=9
 
+QUICK NOTES ON IMPLENTATION
+Create tokenizer object in VARIABLES scope and reference functions.
+
+DETAILED NOTES ON IMPLEMENTATION
+The process of implementation goes something like this:
+Step 1 -> Create a tokenizer instance and pass it the session scope (if the page posts to itself place this at the very top,
+before the form processing that will save you having to complete step 4 later)
+variables.tokenizer = createObject('component','admin.com.tokenizer').init(session);
+Name of the tokenizer variable doesn't really matter here.
+
+Step 2 -> Create a new token. This takes two arguments: 1) The name of the token (no spaces, must be a valid variable name) 2) the time in seconds before the token expires (make this reasonable considering the length of the form)
+IMPORTANT:: If the form self posts then this should be done after the form processing code but before the
+display of the form itself. 
+
+variables.tokenizer.createToken('tokenName',300);
+
+Step 3 -> Write the token to the page with in the
+<form>
+<cfoutput>#variables.tokenizer.writeTokenToPage('tokenName')#</cfoutput>
+The rest of the implementation happens in your form processing code
+
+Step 4 -> Create an instance of the tokenizer if you are self-posting this form and you followed Step 1 (hint hint) then you
+can skip this step and collect $200.
+
+variables.tokenizer = createObject('component','admin.com.tokenizer').init(session);
+
+Step 5 -> in the IF statement that kicks off form processing add the following
+AND variables.tokenizer.checkToken('tokenName',form.xsrf_token)
+This does all the checking to ensure that the token is valid
+
+Step 6 -> inside the form processing IF statement and after you are done with all the form processing add this line
+<cfset variables.tokenizer.removeToken('tokenName')>
+This removes the token and prevents the form from being double posted.
+
 Changes
 -----------------------------------------
 1.2
@@ -28,7 +62,6 @@ Changes
 	This is the base release. Check out the CFC and the comments in it to understand all the features, etc.
 
 
-
 Requirements
 -----------------------------------------
 Tokenizer has been tested on CF 9.0.1 and Railo 3.2.2+. It should also work on CF 8 and OpenBD, though it has not been
@@ -38,11 +71,9 @@ If you test it and it works email daniel@designfrontier.net and I'll add it to t
 it. Thanks!
 
 
-
 Credits
 -----------------------------------------
 The application.cfc in the examples is heavily based on Ben Nadel's application.cfc template (http://www.bennadel.com/blog/726-ColdFusion-Application-cfc-Tutorial-And-Application-cfc-Reference.htm). The concept 
 for tokenizer draws heavily on Jason Dean's may fantastic security articles (htttp://12robots.com) which you should be reading. The AJAX header code draws on http://existdissolve.com/2010/10/cfscript-alternative-to-cfheader/  for writing headers in cfscript.
-
 
 Tokenizer is created and maintained by Daniel Sellers www.designfrontier.net
