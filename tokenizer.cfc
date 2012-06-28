@@ -75,7 +75,7 @@
     	<cfargument name="tokenName" required="true" type="string">
         
         <cfscript>
-			return '<input type="hidden" name="xsrf_token" id="xsrf_token" value="' & variables.tokenStore[arguments.tokenName].token & '" />';
+			return '<input type="hidden" name="' & arguments.tokenInputFieldName & '" id="' & arguments.tokenInputFieldName & '" value="' & variables.tokenStore[arguments.tokenName].token & '" />';
 		</cfscript>
     </cffunction>
     
